@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraflag.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main}">
+<head>
+    <meta charset="utf-8" />
+    <title>Test</title>
+    <!--  <link href="css/m.css" rel="stylesheet" type="text/css">-->
+</head>
+<body>
+<table
+        border="1"
+        align="center"
+        rules="rows"
+        style="width:60%;">
+    <tr>
+        <td>
+            <table
+                    border="1"
+                    bgcolor="#1E90FF"
+                    cellpadding="10"
+                    style="width:100%; border-radius:5px;">
+                <tr>
+                    <th>
+                        <h1>Органайзер</h1>
+                    </th>
+                </tr>
+            </table>
+            <table
+                    border="1"
+                    bgcolor="#e6e6fa"
+                    style="width:100%; border-radius:5px;">
+                <tr>
+                    <td>
+                        <form id="theForm" th:object="${user}" style="display: block">
+                            <a>Пользователь:</a>
+                            <a th:text="${user.getFirstName() + ' ' + user.getLastName()}"></a>
+                            <button type="button" id="editButton">edit</button>
+                        </form>
+
+                        <form id="editForm" th:method="PATCH" th:action="@{/users/{id}(id=${user.getId()})}"
+                              th:object="${user}" style="display: none">
+                            <label for="firstName">Enter firstName: </label>
+                            <input type="text" th:field="*{firstName}" id="firstName"/>
+                            <br/>
+                            <label for="lastName">Enter lastName: </label>
+                            <input type="text" th:field="*{lastName}" id="lastName"/>
+                            <br/>
+                            <select name="role">
+                                <option th:each="roleOpt : ${T(ru.lavStep.springcourse.entites.Role).values()}"
+                                        th:value="${roleOpt}" th:text="${roleOpt}"></option>
+                            </select>
+                            <input type="submit" value="Update"/>
+                        </form>
+                        <form th:method="GET" th:action="@{/users/{id}/delete(id=${user.getId()})}">
+                            <input type="hidden" name="_method" value="delete">
+                            <input type="submit" value="Delete">
+                        </form>
+                    </td>
+
+
+                    <td bgcolor="#e6e6fa" rowspan="2">
+                        <h3>Меню</h3>
+                        <form th:method="GET" th:action="@{/first}">
+                            <input type="submit" value="to Main Page">
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td
+                            bgcolor="#e6e6fa"
+                            align="center">
+                        <h3>Tasks</h3>
+                        <div th:each="task : ${tasks}">
+                            <table border="1" align="center" style="width:100%; border-radius:5px;">
+                                <tbody white-space="nowrap">
+                                <tr>
+                                    <td width="60%"><a th:href="@{|/tasks/|}+${task.getId()}" th:text="${task.getName()}">user</a></td>
+                                    <td width="20%"><a th:text="${task.getDeadline()}"></a></td>
+                                    <td width="20%"><a th:text="${task.getStatus()}"></a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <table
+                    border="1"
+                    bgcolor="#1E90FF"
+                    height="100"
+                    cellpadding="10"
+                    style="width:100%; border-radius:5px;">
+                <tr>
+                    <th>
+                        <h3></h3>
+                    </th>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<script type="text/javascript" layout:fragment="js">
+    const editButton = document.getElementById("editButton")
+    editButton.addEventListener("click", switchForm)
+
+    function switchForm(){
+        var theForm = document.getElementById("theForm");
+        var editForm = document.getElementById("editForm")
+        theForm.style.display = "none";
+        editForm.style.display = "block";
+    }
+</script>
+</body>
+</html>

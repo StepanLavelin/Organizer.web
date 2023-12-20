@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Test</title>
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+<table
+        border="1"
+        align="center"
+        rules="rows"
+        style="width:60%;">
+    <!--Создаём строку-->
+    <tr>
+        <!--Создаём ячейку строки-->
+        <td>
+            <!--ШАПКА САЙТА-->
+            <table
+                    border="1"
+                    bgcolor="#1E90FF"
+                    style="width:100%; border-radius:5px;">
+                <tr>
+                    <th>
+                        <h1>Органайзер</h1>
+                    </th>
+                </tr>
+            </table>
+
+            <!--ОСНОВНОЙ КОНТЕНТ-->
+            <table
+                    border="1"
+                    bgcolor="#e6e6fa"
+                    style="width:100%; border-radius:5px;">
+                <tr>
+                    <td align="center">
+                        <h2>Пользователи</h2>
+                        <div th:each="user : ${users}">
+                            <table border="1" style="width:100%; border-radius:5px;">
+                                <tbody white-space="nowrap">
+                                <tr>
+                                    <td>
+                                        <a th:href="@{|users/${user.getId()}|}" th:text="${user.getFirstName() + ' ' + user.getLastName()}">user</a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+
+                    <!--САЙДБАР-->
+
+                    <td bgcolor="#e6e6fa" rowspan="2">
+                        <h3>Меню</h3>
+                        <form th:method="GET" th:action="@{/users/new}">
+                            <input type="submit" value="Create new user">
+                        </form>
+                        <form th:method="GET" th:action="@{/tasks/new}">
+                            <input type="submit" value="Create new task">
+                        </form>
+                    </td>
+                </tr>
+                <!--Создаём строку с дополнительной информацией-->
+                <tr>
+                    <!--Ячейка с дополнительной информацией-->
+                    <td
+                            bgcolor="#e6e6fa"
+                            align="center">
+                        <h3>Задачи</h3>
+                        <div th:each="task : ${tasks}">
+                            <table border="1" style="width:100%; border-radius:5px;">
+                                <tbody>
+                                <tr>
+                                    <td width="60%"><a th:href="@{|tasks/${task.getId()}|}" th:text="${task.getName()}">user</a></td>
+                                    <td width="20%"><a th:text="${task.getDeadline()}"></a></td>
+                                    <td width="20%"><a th:text="${task.getStatus()}"></a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <!--ПОДВАЛ-->
+            <table
+                    border="1"
+                    bgcolor="#1E90FF"
+                    height="100"
+                    cellpadding="10"
+                    style="width:100%; border-radius:5px;">
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraflag.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main}">
+<head>
+    <meta charset="utf-8" />
+    <title>Test</title>
+    <!--  <link href="css/m.css" rel="stylesheet" type="text/css">-->
+</head>
+<body>
+<table
+        border="1"
+        align="center"
+        rules="rows"
+        style="width:60%;">
+    <tr>
+        <td>
+            <table
+                    border="1"
+                    bgcolor="#1E90FF"
+                    cellpadding="10"
+                    style="width:100%; border-radius:5px;">
+                <tr>
+                    <th>
+                        <h1>Органайзер</h1>
+                    </th>
+                </tr>
+            </table>
+            <table
+                    border="1"
+                    bgcolor="#e6e6fa"
+                    style="width:100%; border-radius:5px;">
+                <tr>
+                    <td>
+                        <a>Создать задание:</a>
+
+                        <form id="editForm" th:method="POST" th:action="@{/tasks}">
+                            <label for="name">Name task</label>
+                            <input name="name" type="text" id="name">
+                            <br>
+                            <label for="performer">Performer</label>
+                            <select name="performer" id="performer">
+                                <option th:each="user : ${users}"
+                                        th:value="${user.getId()}" th:text="${user.getFirstName()} + ' ' + ${user.getLastName()}"></option>
+                            </select>
+                            <br>
+                            <label>Enter task's description : </label>
+                            <br>
+                            <textarea rows="20" cols="80" name="description"  id="description"></textarea>
+                            <br>
+                            <label for="deadline">Deadline</label>
+                            <input type="date" id="deadline" name="deadline">
+                            <br>
+                            <input type="submit" value="Create new task"/>
+                        </form>
+                    </td>
+
+
+                    <td bgcolor="#e6e6fa">
+                        <h3>Меню</h3>
+                    </td>
+                </tr>
+            </table>
+
+            <table
+                    border="1"
+                    bgcolor="#1E90FF"
+                    height="100"
+                    cellpadding="10"
+                    style="width:100%; border-radius:5px;">
+                <tr>
+                    <th>
+                        <h3>Подвал</h3>
+                    </th>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

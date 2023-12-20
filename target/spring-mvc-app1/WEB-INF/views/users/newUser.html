@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraflag.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main}">
+<head>
+  <meta charset="utf-8" />
+  <title>Test</title>
+  <!--  <link href="css/m.css" rel="stylesheet" type="text/css">-->
+</head>
+<body>
+<table
+        border="1"
+        align="center"
+        rules="rows"
+        style="width:60%;">
+  <tr>
+    <td>
+      <table
+              border="1"
+              bgcolor="#1E90FF"
+              cellpadding="10"
+              style="width:100%; border-radius:5px;">
+        <tr>
+          <th>
+            <h1>Органайзер</h1>
+          </th>
+        </tr>
+      </table>
+      <table
+              border="1"
+              bgcolor="#e6e6fa"
+              style="width:100%; border-radius:5px;">
+        <tr>
+          <td>
+            <a>Пользователь:</a>
+
+            <form id="editForm" th:method="POST" th:action="@{/users}">
+              <label for="firstName">Name</label>
+              <input name="firstName" type="text" id="firstName">
+              <br>
+              <label for="lastName">Enter lastName: </label>
+              <input name="lastName" type="text" id="lastName"/>
+              <br>
+              <input type="submit" value="Create new User"/>
+            </form>
+          </td>
+
+
+          <td bgcolor="#e6e6fa">
+            <h3>Меню</h3>
+          </td>
+        </tr>
+      </table>
+
+      <table
+              border="1"
+              bgcolor="#1E90FF"
+              height="100"
+              cellpadding="10"
+              style="width:100%; border-radius:5px;">
+        <tr>
+          <th>
+            <h3>Подвал</h3>
+          </th>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
